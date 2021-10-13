@@ -1,19 +1,22 @@
 <template>
   <div id="app">
     <!-- <HomePage /> -->
-    <OptionsPage />
+    <Home />
+    <!-- <OptionsPage /> -->
   </div>
 </template>
 
 <script>
 // import HomePage from './components/HomePage.vue'
-import OptionsPage from './components/OptionsPage.vue'
+import Home from './components/Home.vue'
+// import OptionsPage from './components/OptionsPage.vue'
 
 export default {
   name: 'App',
   components: {
     // HomePage,
-    OptionsPage
+    Home,
+    // OptionsPage
   }
 }
 </script>

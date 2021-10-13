@@ -57,12 +57,12 @@ export default {
     background-color: #C9F0D4;
     width: 100%;
     height: 100vh;
-    display: flex;
-    justify-content: center;
 }
 
 .content-div {
-    width: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     align-self: center;
     padding: 0.5rem;
 }
@@ -85,13 +85,12 @@ export default {
     justify-content: center;
 } */
 
-.right-column {
+/* .right-column {
     display: flex;
     justify-content: center;
-}
+} */
 
 .uploadimage-div {
-    width: 100%;
 }
 
 .droparea {
