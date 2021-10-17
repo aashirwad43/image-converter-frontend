@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="home">
-      <b-row>
+      <b-row class="m-0">
         <b-col md="6" class="cards-column">
           <div class="contents-div">
             <div class="heading">
@@ -24,6 +24,7 @@
                 style="display:none"
                 id="file-input"
                 @change="readFile"
+                accept="image/jpg, image/png"
               />
               <label for="file-input">
                 <div
@@ -37,13 +38,15 @@
                   >
                     <div class="text-center">
                       <div v-if="imageURL">
-                        <img :src="imageURL" />
+                        <img :src="imageURL" class="uploaded-image" />
                       </div>
                       <div v-else>
                         <img :src="drophere" />
+                        <br />
+                        <small class="text-muted"
+                          >Drag or Drop image here.</small
+                        >
                       </div>
-                      <br />
-                      <small class="text-muted">Drag or Drop image here.</small>
                     </div>
                   </div>
                 </div>
@@ -51,7 +54,13 @@
             </div>
             <div class="button-div">
               <div v-if="fileName">
-                <b-button class="next-button" variant="success">Next</b-button>
+                <b-button
+                  class="next-button"
+                  href="./optionspage"
+                  variant="success"
+                  @click="sendData"
+                  >Next</b-button
+                >
               </div>
               <div v-else>
                 <b-button class="browse-button" variant="secondary"
@@ -73,6 +82,7 @@ import Footer from "./Footer.vue";
 
 export default {
   name: "Home",
+  props: ["setImageData", "changeNav"],
   data() {
     return {
       homepage: require("../assets/homepage.svg"),
@@ -80,6 +90,7 @@ export default {
       file: null,
       imageURL: "",
       fileName: "",
+      fileType: "",
     };
   },
   components: {
@@ -96,7 +107,20 @@ export default {
         this.imageURL = reader.result;
         this.file = file;
         this.fileName = file.name;
+        this.fileType = file.type.split("/")[1];
       });
+    },
+
+    sendData(e) {
+      e.preventDefault();
+      let dataToSend = {
+        image: this.imageURL,
+        imageType: this.fileType,
+        imageName: this.fileName,
+        imageFile: this.file,
+      };
+      this._props.setImageData(dataToSend);
+      this._props.changeNav("options");
     },
   },
 };
@@ -162,6 +186,7 @@ export default {
   justify-content: center;
   align-items: center;
   border: 2px dashed;
+  cursor: pointer;
 }
 
 .input-style {
@@ -251,6 +276,10 @@ export default {
     height: 1.5rem;
   }
 
+  .next-button {
+    height: 1.5rem;
+  }
+
   .filename {
     height: 1.5rem;
   }
@@ -262,7 +291,6 @@ export default {
 
 @media (max-width: 576px) {
   .home {
-    /* height: 100%; */
     padding-top: 20px;
   }
 }
