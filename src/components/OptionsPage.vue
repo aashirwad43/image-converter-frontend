@@ -171,7 +171,6 @@ export default {
       card1: require("../assets/convertimage.png"),
       card2: require("../assets/compress.png"),
       card3: require("../assets/resize.png"),
-      downloading: require("../assets/downloading.gif"),
       loader: null,
       value: 50,
     };
