@@ -114,18 +114,27 @@
                 </div>
                 <div class="lower-div">
                   <div class="title">
-                    <span><strong>Name:</strong></span>
+                    <span
+                      class="d-flex align-items-center justify-content-between h-100"
+                      ><strong>Name:</strong></span
+                    >
                   </div>
                   <div class="image-name">
-                    <span>{{ imageName }}</span>
+                    <span
+                      class="d-flex align-items-center justify-content-between h-100 w-100"
+                      >{{ imageName }}</span
+                    >
                   </div>
                   <div class="want-to-go-back">
-                    <span><strong>Upload new image?</strong></span>
-                    <b-button
-                      @click="goBackHome"
-                      class="btn btn-sm btn-secondary"
-                      >Back</b-button
+                    <div
+                      class="d-flex align-items-center justify-content-between w-100 h-100"
                     >
+                      <b-button
+                        @click="goBackHome"
+                        class="btn btn-sm btn-secondary"
+                        >Upload new image</b-button
+                      >
+                    </div>
                   </div>
                 </div>
               </div>
@@ -493,31 +502,34 @@ circle {
 
 .lower-div {
   display: flex;
-  flex-direction: row;
+  /* flex-direction: row; */
   background-color: white;
   border-radius: 15px;
   margin-top: 0.5rem;
   padding: 0.4rem;
+  justify-content: space-between;
 }
 
 .title {
-  width: 20%;
+  /* width: 20%; */
   padding-left: 5px;
   padding-top: 5px;
+  flex: 3%;
 }
 
 .image-name {
-  width: 40%;
+  /* width: 40%; */
   background-color: lightgray;
   border-radius: 15px;
+  flex: 33%;
 }
 
-.want-to-go-back {
+/* .want-to-go-back {
   padding-left: 3rem;
-}
+} */
 
 .want-to-go-back button {
-  margin-left: 2rem;
+  margin-left: 0.5rem;
 }
 
 @media (max-width: 991px) {

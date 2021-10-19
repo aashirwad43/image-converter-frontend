@@ -2,7 +2,7 @@
   <div>
     <div class="home">
       <b-row class="m-0">
-        <b-col md="6" class="cards-column">
+        <b-col sm="6" class="cards-column">
           <div class="contents-div">
             <div class="heading">
               <span>
@@ -16,7 +16,7 @@
             </div>
           </div>
         </b-col>
-        <b-col md="6" class="cards-column">
+        <b-col sm="6" class="cards-column">
           <div class="contents-div">
             <div class="droparea">
               <input
@@ -69,7 +69,10 @@
                 >
               </div>
               <div class="filename">
-                <small>{{ fileName }}</small>
+                <small
+                  class="d-flex align-items-center justify-content-center w-100 h-100"
+                  >{{ fileName }}</small
+                >
               </div>
             </div>
           </div>
@@ -139,7 +142,7 @@ export default {
 .home {
   background-color: #c9f0d4;
   width: 100%;
-  height: 96.2169vh;
+  min-height: 96.2169vh;
   display: flex;
   flex-direction: column;
   /* text-align: center; */
@@ -203,7 +206,7 @@ export default {
 .button-div {
   background-color: white;
   width: 25rem;
-  height: 3rem;
+  min-height: 3rem;
   margin-top: 1rem;
   padding: 10px;
   border-radius: 15px;
@@ -212,7 +215,7 @@ export default {
 }
 
 .browse-button {
-  height: 2rem;
+  max-height: 2rem;
   text-align: center;
   align-items: center;
   display: flex;
@@ -221,7 +224,7 @@ export default {
 }
 
 .next-button {
-  height: 2rem;
+  max-height: 2rem;
   text-align: center;
   align-items: center;
   display: flex;
@@ -233,11 +236,12 @@ export default {
 
 .filename {
   background-color: lightgray;
-  height: 2rem;
+  min-height: 2rem;
   width: 18rem;
   border-radius: 5px;
   padding: 5px;
   padding-left: 10px;
+  /* overflow-x: scroll; */
 }
 
 .uploaded-image img {
@@ -287,22 +291,22 @@ export default {
   .button-div {
     background-color: white;
     width: 15rem;
-    height: 2rem;
+    min-height: 2rem;
     margin-top: 1rem;
     border-radius: 15px;
   }
 
   .browse-button {
-    height: 1.5rem;
+    min-height: 1.5rem;
   }
 
   .next-button {
-    height: 1.5rem;
+    min-height: 1.5rem;
   }
 
-  .filename {
-    height: 1.5rem;
-  }
+  /* .filename {
+    min-height: 1.5rem;
+  } */
 
   .cards-column {
     margin-bottom: 3rem;
