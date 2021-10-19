@@ -33,14 +33,15 @@
                   @dragover.prevent
                   @drop="readFile"
                 >
+                  <div v-if="imageURL" class="uploaded-image">
+                    <img :src="imageURL" />
+                  </div>
                   <div
+                    v-else
                     class="h-100 w-100 d-flex align-items-center justify-content-center"
                   >
-                    <div class="text-center">
-                      <div v-if="imageURL">
-                        <img :src="imageURL" class="uploaded-image" />
-                      </div>
-                      <div v-else>
+                    <div>
+                      <div class="text-center">
                         <img :src="drophere" />
                         <br />
                         <small class="text-muted"
@@ -67,7 +68,9 @@
                   >Browse</b-button
                 >
               </div>
-              <div class="filename">{{ fileName }}</div>
+              <div class="filename">
+                <small>{{ fileName }}</small>
+              </div>
             </div>
           </div>
         </b-col>
@@ -169,8 +172,10 @@ export default {
 
 .droparea {
   background-color: white;
-  width: 25rem;
-  height: 25rem;
+  /* width: 25rem;
+  height: 25rem; */
+  width: 100%;
+  padding: 1rem;
   border-radius: 15px;
   display: flex;
   justify-content: center;
@@ -179,8 +184,10 @@ export default {
 
 .dropzone {
   background-color: lightgrey;
-  width: 23rem;
-  height: 23rem;
+  /* width: 23rem;
+  height: 23rem; */
+  min-width: 23rem;
+  min-height: 23rem;
   border-radius: 15px;
   display: flex;
   justify-content: center;
@@ -233,6 +240,18 @@ export default {
   padding-left: 10px;
 }
 
+.uploaded-image img {
+  width: 22rem;
+  padding: 0.5rem;
+}
+
+/* .uploadedImage {
+  width: 100%;
+  height: 23rem;
+  background-image: url(${imageURL});
+  background-size: cover;
+} */
+
 @media (max-width: 991px) {
   .home {
     padding-top: 20px;
@@ -251,13 +270,13 @@ export default {
   }
 
   .droparea {
-    width: 15rem;
-    height: 15rem;
+    min-width: 15rem;
+    min-height: 15rem;
   }
 
   .dropzone {
-    width: 13rem;
-    height: 13rem;
+    min-width: 13rem;
+    min-height: 13rem;
   }
 
   .dropzone img {
@@ -286,6 +305,10 @@ export default {
 
   .cards-column {
     margin-bottom: 3rem;
+  }
+
+  .uploaded-image img {
+    width: 12rem;
   }
 }
 

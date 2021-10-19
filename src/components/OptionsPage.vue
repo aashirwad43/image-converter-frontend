@@ -7,41 +7,41 @@
         </div>
         <div class="cards-div">
           <b-row class="m-0">
-            <b-col lg="4" class="cards-column">
-              <b-card
-                title="Convert Image Format"
-                :img-src="card1"
-                img-alt="Image"
-                img-top
-                style="max-width: 20rem;"
-                class="options-card shadow-lg rounded-lg mb-2"
-              >
-                <b-card-text>
-                  Change your PNG image to JPG or JPG image to PNG
-                </b-card-text>
+            <b-col lg="3" md="6" class="cards-column">
+              <div class="outer-div">
+                <b-card
+                  title="Convert Image Format"
+                  :img-src="card1"
+                  img-alt="Image"
+                  img-top
+                  class="options-card shadow-lg rounded-lg mb-2 w-100"
+                >
+                  <b-card-text>
+                    Change your PNG image to JPG or JPG image to PNG
+                  </b-card-text>
 
-                <div v-if="imageData.imageType == 'png'">
-                  <b-button
-                    class="pngtojpg"
-                    @click="convertImage"
-                    href="#"
-                    variant="success"
-                    >PNG to JPG</b-button
-                  >
-                </div>
+                  <div v-if="imageData.imageType == 'png'">
+                    <b-button
+                      class="pngtojpg"
+                      @click="convertImage"
+                      href="#"
+                      variant="success"
+                      >PNG to JPG</b-button
+                    >
+                  </div>
 
-                <div v-else>
-                  <b-button
-                    class="jpgtopng"
-                    @click="convertImage"
-                    href="#"
-                    variant="success"
-                    >JPG to PNG</b-button
-                  >
-                </div>
+                  <div v-else>
+                    <b-button
+                      class="jpgtopng"
+                      @click="convertImage"
+                      href="#"
+                      variant="success"
+                      >JPG to PNG</b-button
+                    >
+                  </div>
 
-                <!-- <br /> -->
-                <!-- <div
+                  <!-- <br /> -->
+                  <!-- <div
                   v-else-if="
                     imageData.imageType == 'jpg' ||
                       imageData.imageType == 'jpeg'
@@ -51,36 +51,37 @@
                     >JPG to PNG</b-button
                   >
                 </div> -->
-              </b-card>
+                </b-card>
+              </div>
             </b-col>
-            <b-col lg="4" class="cards-column">
-              <b-card
-                title="Compress Image"
-                :img-src="card2"
-                img-alt="Image"
-                img-top
-                img-height="240"
-                style="max-width: 20rem;"
-                class="options-card shadow-lg rounded-lg mb-2"
-              >
-                <b-card-text>
-                  Reduce the size of your image according to your need
-                  <br />
-                  <span class="note"
-                    >[Note: The more you compress the blurry it gets.]</span
-                  >
-                </b-card-text>
-                <b-button
-                  v-b-modal.modal-center
-                  class="next"
-                  href="#"
-                  variant="success"
-                  >NEXT</b-button
+            <b-col lg="3" md="6" class="cards-column">
+              <div class="outer-div">
+                <b-card
+                  title="Compress Image"
+                  :img-src="card2"
+                  img-alt="Image"
+                  img-top
+                  class="options-card shadow-lg rounded-lg mb-2 w-100"
                 >
-              </b-card>
+                  <b-card-text>
+                    Reduce the size of your image according to your need
+                    <br />
+                    <span class="note"
+                      >[Note: The more you compress the blurry it gets.]</span
+                    >
+                  </b-card-text>
+                  <b-button
+                    v-b-modal.modal-center
+                    class="next"
+                    href="#"
+                    variant="success"
+                    >NEXT</b-button
+                  >
+                </b-card>
+              </div>
             </b-col>
-            <b-col lg="4" class="cards-column">
-              <b-card
+            <b-col lg="6" class="cards-column">
+              <!-- <b-card
                 title="Resize Image"
                 :img-src="card3"
                 img-alt="Image"
@@ -104,7 +105,30 @@
                   disabled
                   >Coming Soon...</b-button
                 >
-              </b-card>
+              </b-card> -->
+              <div class="image-show-div">
+                <div class="image-showcase">
+                  <div class="image-div">
+                    <img :src="image" />
+                  </div>
+                </div>
+                <div class="lower-div">
+                  <div class="title">
+                    <span><strong>Name:</strong></span>
+                  </div>
+                  <div class="image-name">
+                    <span>{{ imageName }}</span>
+                  </div>
+                  <div class="want-to-go-back">
+                    <span><strong>Upload new image?</strong></span>
+                    <b-button
+                      @click="goBackHome"
+                      class="btn btn-sm btn-secondary"
+                      >Back</b-button
+                    >
+                  </div>
+                </div>
+              </div>
             </b-col>
           </b-row>
         </div>
@@ -129,9 +153,16 @@
       style="display: none"
     >
       <div class="download-toast">
-        Download Sucessful ✅
+        Download Successful ✅
       </div>
     </div>
+
+    <div class="download-toast-wrapper" id="errorMessage" style="display: none">
+      <div class="download-toast">
+        Something went wrong 🚨
+      </div>
+    </div>
+
     <b-modal
       id="modal-center"
       centered
@@ -173,6 +204,8 @@ export default {
       card3: require("../assets/resize.png"),
       loader: null,
       value: 50,
+      image: this._props.imageData.image,
+      imageName: this._props.imageData.imageName,
     };
   },
   components: {
@@ -234,6 +267,18 @@ export default {
             5 * 1000
           );
         },
+        error: (err) => {
+          console.log("There is an error.", err);
+
+          this.loader ? this.loader.hide() : null;
+
+          document.getElementById("errorMessage").style.display = "block";
+          setTimeout(
+            () =>
+              (document.getElementById("errorMessage").style.display = "none"),
+            5 * 1000
+          );
+        },
       });
     },
 
@@ -241,7 +286,7 @@ export default {
       let data = new FormData();
 
       data.append("image", this._props.imageData.imageFile);
-      data.append("compress", this.value);
+      data.append("compress", 100 - this.value);
 
       this.loader ? this.loader.show() : null;
 
@@ -289,7 +334,25 @@ export default {
             5 * 1000
           );
         },
+
+        error: (err) => {
+          console.log("There is an error.", err);
+
+          this.loader ? this.loader.hide() : null;
+
+          document.getElementById("errorMessage").style.display = "block";
+          setTimeout(
+            () =>
+              (document.getElementById("errorMessage").style.display = "none"),
+            5 * 1000
+          );
+        },
       });
+    },
+
+    goBackHome() {
+      this._props.imageData = null;
+      this._props.changeNav("home");
     },
   },
   mounted: function() {
@@ -326,6 +389,10 @@ export default {
 
 .cards-div {
   margin-top: 5rem;
+}
+
+.options-card {
+  min-height: 28rem;
 }
 
 .card {
@@ -393,15 +460,6 @@ circle {
   stroke-linecap: round;
   animation: dash 1.75s ease-in-out infinite;
 }
-
-.download-toast-wrapper {
-  /* position: relative;
-  height: 5rem; */
-  /* width: 100%; */
-  /* bottom: 0;
-  left: 0; */
-}
-
 .download-toast {
   position: fixed;
   bottom: 2rem;
@@ -415,9 +473,52 @@ circle {
   animation: bottom 0.4s ease-in-out;
 }
 
-/* #downloadMessage.show {
-  bottom: 2rem;
-} */
+.image-showcase {
+  /* width: 100%; */
+  background-color: white;
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5rem;
+}
+
+.image-div {
+  border: 2px dashed;
+}
+
+.image-div img {
+  width: 22rem;
+}
+
+.lower-div {
+  display: flex;
+  flex-direction: row;
+  background-color: white;
+  border-radius: 15px;
+  margin-top: 0.5rem;
+  padding: 0.4rem;
+}
+
+.title {
+  width: 20%;
+  padding-left: 5px;
+  padding-top: 5px;
+}
+
+.image-name {
+  width: 40%;
+  background-color: lightgray;
+  border-radius: 15px;
+}
+
+.want-to-go-back {
+  padding-left: 3rem;
+}
+
+.want-to-go-back button {
+  margin-left: 2rem;
+}
 
 @media (max-width: 991px) {
   .optionspage {
@@ -431,8 +532,27 @@ circle {
   .cards-column {
     margin-bottom: 10px;
   }
+
+  .options-card {
+    min-height: 34rem;
+  }
 }
 
 @media (max-width: 576px) {
+  .heading-div {
+    font-size: 20px;
+  }
+
+  .title {
+    width: 20%;
+  }
+
+  .options-card {
+    min-height: 25rem;
+  }
+
+  .image-div img {
+    width: 20rem;
+  }
 }
 </style>
