@@ -255,6 +255,7 @@ export default {
 @media (max-width: 991px) {
   .home {
     padding-top: 20px;
+    max-height: 100%;
   }
 
   .cards-column {
@@ -314,7 +315,8 @@ export default {
 
 @media (max-width: 576px) {
   .home {
-    padding-top: 20px;
+    padding-top: 40px;
+    min-height: 100%;
   }
 }
 </style>
