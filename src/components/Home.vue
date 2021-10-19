@@ -316,7 +316,8 @@ export default {
 @media (max-width: 576px) {
   .home {
     padding-top: 40px;
-    min-height: 100%;
+    min-height: 96.2169vh;
+    max-height: 100%;
   }
 }
 </style>
