@@ -24,7 +24,7 @@
                 style="display:none"
                 id="file-input"
                 @change="readFile"
-                accept="image/jpg, image/png"
+                accept="image/jpg, image/png, image/jpeg"
               />
               <label for="file-input">
                 <div
