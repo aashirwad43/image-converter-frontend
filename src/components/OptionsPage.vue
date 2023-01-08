@@ -230,7 +230,7 @@ export default {
 
       $.ajax({
         method: "POST",
-        url: "https://image-converter-compressor.herokuapp.com/api/converter/",
+        url: "https://image-converter-compressor.up.railway.app/api/converter/",
         xhr: function() {
           var xhr = new XMLHttpRequest();
           xhr.onreadystatechange = function() {
@@ -301,7 +301,8 @@ export default {
 
       $.ajax({
         method: "POST",
-        url: "https://image-converter-compressor.herokuapp.com/api/compressor/",
+        url:
+          "https://image-converter-compressor.up.railway.app/api/compressor/",
         xhr: function() {
           var xhr = new XMLHttpRequest();
           xhr.onreadystatechange = function() {
