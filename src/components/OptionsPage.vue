@@ -230,7 +230,8 @@ export default {
 
       $.ajax({
         method: "POST",
-        url: "https://image-converter-compressor.up.railway.app/api/converter/",
+        // url: "https://image-converter-compressor.up.railway.app/api/converter/",
+        url: "https://image-converter-compressor.vercel.app/api/converter/",
         xhr: function() {
           var xhr = new XMLHttpRequest();
           xhr.onreadystatechange = function() {
@@ -301,8 +302,7 @@ export default {
 
       $.ajax({
         method: "POST",
-        url:
-          "https://image-converter-compressor.up.railway.app/api/compressor/",
+        url: "https://image-converter-compressor.vercel.app/api/compressor/",
         xhr: function() {
           var xhr = new XMLHttpRequest();
           xhr.onreadystatechange = function() {
